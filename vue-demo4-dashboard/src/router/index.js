@@ -3,9 +3,21 @@ import Router from 'vue-router'
 import HelloWorld from '@/components/HelloWorld'
 import 'element-ui/lib/theme-chalk/index.css'
 import Element from 'element-ui'
+import Layout from '@/views/Layout'
+
+import errorPage from '@/views/error-page/404'
+
+import navigatorOneThree from '@/views/navigatorOne/itemThree/itemThree'
+import navigatorOneTwo from '@/views/navigatorOne/itemTwo/itemTwo'
+import navigatorOneOne from '@/views/navigatorOne/itemOne/itemOne'
+import Common from '@/views/navigatorTwo/CommonInvite'
+
+import navigatorTwoOne from '@/views/navigatorTwo/itemOne/itemOne'
+import navigatorTwoTwo from '@/views/navigatorTwo/itemTwo/itemTwo'
+import navigatorTwoThree from '@/views/navigatorTwo/itemThree/itemThree'
+import navigatorTwoFour from '@/views/navigatorTwo/itemFour/itemFour'
 
 /* Layout */
-
 Vue.use(Router)
 Vue.use(Element)
 
@@ -33,6 +45,7 @@ Vue.use(Element)
  * a base page that does not have permission requirements
  * all roles can be accessed
  */
+
 export const constantRoutes = [
   {
     path: '/login',
@@ -41,8 +54,130 @@ export const constantRoutes = [
   },
   {
     path: '/',
-    name: '/',
-    component: HelloWorld
+    name: 'home',
+    component: Layout,
+    hidden: true
+  },
+  {
+    path: '/HelloWorld',
+    name: 'HelloWorld',
+    component: HelloWorld,
+    hidden: true
+  },
+  {
+    path: '/navigatorOne',
+    name: 'one',
+    component: Layout,
+    redirect: '/navigatorOne/itemOne',
+    meta: {
+      icon: 'icon-dashboard',
+      title: 'navigatorOne'
+    },
+    children: [
+      {
+        name: '1-itemOne',
+        path: 'itemOne',
+        component: navigatorOneOne,
+        meta: {
+          title: 'item one'
+          // codes: ['item-one']
+        }
+      },
+      {
+        name: '1-itemTwo',
+        path: 'itemTwo',
+        component: navigatorOneTwo,
+        meta: {
+          title: 'item two',
+          codes: ['item-two'] // 无权限
+        }
+      },
+      {
+        name: '1-itemThree',
+        path: 'itemThree',
+        component: navigatorOneThree,
+        meta: {
+          title: 'itme three',
+          codes: ['item-three'] // 无权限
+        }
+      }
+    ]
+  },
+  {
+    path: '/navigatorTwo',
+    name: 'two',
+    component: Layout,
+    redirect: '/navigatorTwo/itemOne',
+    meta: {
+      icon: 'icon-58',
+      title: 'navigatorTwo'
+    },
+    // hidden: true,
+    children: [
+      {
+        path: 'itemOne',
+        component: navigatorTwoOne,
+        meta: {
+          title: 'example',
+          codes: ['item-one']
+        }
+      },
+      {
+        path: 'itemTwo',
+        name: 'itemTwo',
+        component: Common,
+        meta: {
+          title: 'item two'
+        },
+        children: [
+          {
+            path: 'table1',
+            name: 'table1',
+            component: navigatorTwoOne,
+            meta: {
+              title: 'table1'
+            }
+          },
+          {
+            path: 'table2',
+            name: 'table2',
+            component: navigatorTwoTwo,
+            meta: {
+              title: 'table2'
+            }
+          },
+          {
+            name: 'two/id',
+            path: 'two/:id',
+            component: navigatorTwoThree,
+            hidden: true,
+            meta: {
+              activeMenu: '/navigatorTwo/itemTwo/table2'
+            }
+          }
+        ]
+      },
+      {
+        path: 'itemThree',
+        component: navigatorTwoThree,
+        meta: {
+          title: 'item three'
+        }
+      },
+      {
+        path: 'itemFour',
+        component: navigatorTwoFour,
+        meta: {
+          title: 'item four'
+        }
+      }
+    ]
+  },
+  {
+    path: '*',
+    name: '404',
+    component: errorPage,
+    hidden: true
   }
 ]
 
@@ -57,6 +192,9 @@ const router = createRouter()
 // Detail see: https://github.com/vuejs/vue-router/issues/1234#issuecomment-357941465
 export function resetRouter () {
   const newRouter = createRouter()
+  debugger
+  console.log('newRouter')
+  console.log(newRouter)
   router.matcher = newRouter.matcher // reset router
 }
 
