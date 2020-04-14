@@ -1,0 +1,79 @@
+@backgroundColorSty: #304156;
+
+.layout {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    .menu {
+        background-color: @backgroundColorSty;
+        height: 100%;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1001;
+        .scrollbar-wrapper {
+            overflow-x: hidden !important;
+        }
+        .scrollbar-wrapper {
+            overflow-x: hidden !important;
+        }
+        .el-scrollbar__bar.is-vertical {
+            right: 0px;
+        }
+        .el-scrollbar {
+            height: 100%;
+        }
+        .activeWidth {
+            width: 230px;
+            transition: transform .28s;
+        }
+        .el-menu {
+            height: 100%;
+            .el-submenu__title {
+                text-align: left;
+                i {
+                    color: #dee4eb;
+                }
+            }
+            .el-icon-arrow-right:before {
+                content: '' !important;
+            }
+            .el-menu-item {
+                text-align: left;
+            }
+        }
+    }
+    .main {
+        line-height: 32px;
+        position: relative;
+        min-height: 100%;
+        margin-left: 230px;
+        transition: margin-left .28s; // 原来滑动效果是这样做出来的
+        .header {
+            height: 50px;
+            width: 100%;
+            box-shadow: 1px 2px 6px #ddd;
+            background-color: #fff;
+            .el-icon-s-fold, .el-icon-s-unfold {
+                cursor: pointer;
+                margin: 13px 10px;
+                font-size: 25px;
+            }
+            .user {
+                cursor: pointer;
+                float: right;
+                font-size: 18px;
+                font-weight: bold;
+                margin: 15px 25px;
+                text-align: center;
+            }
+        }
+    }
+}
+.hideSidebar {
+    .main {
+        margin-left: 54px;
+    }
+}
+

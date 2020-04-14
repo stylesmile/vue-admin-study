@@ -53,10 +53,16 @@ export const constantRoutes = [
     component: () => import('@/views/login.vue')
   },
   {
-    path: '/',
+    path: '/test',
     name: 'home',
     component: Layout,
     hidden: true
+  },
+  {
+    path: '/',
+    name: 'home1',
+    component: () => import('@/views/Home.vue')
+    // hidden: true
   },
   {
     path: '/HelloWorld',
